@@ -44,7 +44,7 @@ export default async function Image() {
           style={{
             display: "flex",
             alignItems: "flex-end",
-            gap: 40,
+            gap: 24,
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -55,6 +55,7 @@ export default async function Image() {
               fontWeight: 700,
               letterSpacing: "-0.04em",
               lineHeight: 1,
+              marginBottom: 18,
             }}
           >
             Zenbu
