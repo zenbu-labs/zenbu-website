@@ -50,7 +50,7 @@ export default function Home() {
           <IntroCell />
           <FeatureCell
             title="Self-modifiable"
-            description="Zenbu ships with its full source code and runs it directly. Edit any part of the app, or build on top of it with a rich plugin API."
+            description="Zenbu ships with its full source code and runs it directly. Ask your agent to edit any part of the app, or build on top of it with a rich plugin API."
           />
           <FeatureCell
             title="Hot reloading"

@@ -15,27 +15,28 @@ type Option = {
 type Platform = {
   name: string;
   options: Option[];
+  comingSoon?: boolean;
 };
 
 const platforms: Platform[] = [
   {
     name: "macOS",
     options: [
-      { label: "Universal", href: "#" },
-      { label: "Apple Silicon", href: "#" },
-      { label: "Intel", href: "#" },
+      { label: "Apple Silicon", note: "M-series, late 2020 or newer", href: "#" },
+      { label: "Intel", note: "Macs from before late 2020", href: "#" },
     ],
   },
   {
     name: "Windows",
+    comingSoon: true,
     options: [
-      { label: "Universal", href: "#" },
       { label: "x64", href: "#" },
       { label: "ARM64", href: "#" },
     ],
   },
   {
     name: "Linux",
+    comingSoon: true,
     options: [
       { label: "AppImage", href: "#" },
       { label: "Deb", href: "#" },
@@ -64,7 +65,7 @@ export default function DownloadPage() {
           {platforms.map((platform) => (
             <div
               key={platform.name}
-              className="grid grid-cols-[140px_1fr] gap-6 px-6 py-6"
+              className="relative grid grid-cols-[140px_1fr] gap-6 px-6 py-6"
             >
               <div className="text-sm font-semibold">{platform.name}</div>
               <div className="flex flex-col gap-2.5">
@@ -82,6 +83,13 @@ export default function DownloadPage() {
                   </a>
                 ))}
               </div>
+              {platform.comingSoon && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                    Coming soon
+                  </span>
+                </div>
+              )}
             </div>
           ))}
         </div>
