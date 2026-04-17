@@ -55,7 +55,7 @@ export default async function Image() {
               fontWeight: 700,
               letterSpacing: "-0.04em",
               lineHeight: 1,
-              marginBottom: 18,
+              marginBottom: 8,
             }}
           >
             Zenbu
