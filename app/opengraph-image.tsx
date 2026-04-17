@@ -43,7 +43,7 @@ export default async function Image() {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             gap: 40,
           }}
         >

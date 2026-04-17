@@ -11,8 +11,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Zenbu - The extendible coding agent GUI",
-  description:
-    "A simple, extendable interface to run any coding agent. Use Claude Code, Cursor, Codex, or any agent, then customize everything at runtime.",
+  description: "A simple, extendable interface to run any coding agent",
 };
 
 export default function RootLayout({
