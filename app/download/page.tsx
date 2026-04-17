@@ -6,6 +6,8 @@ export const metadata = {
   description: "Download Zenbu for macOS, Windows, and Linux.",
 };
 
+const RELEASES_URL = "https://github.com/zenbu-labs/zenbu/releases";
+
 type Option = {
   label: string;
   note?: string;
@@ -18,35 +20,75 @@ type Platform = {
   comingSoon?: boolean;
 };
 
-const platforms: Platform[] = [
-  {
-    name: "macOS",
-    options: [
-      { label: "Apple Silicon", note: "M-series, late 2020 or newer", href: "#" },
-      { label: "Intel", note: "Macs from before late 2020", href: "#" },
-    ],
-  },
-  {
-    name: "Windows",
-    comingSoon: true,
-    options: [
-      { label: "x64", href: "#" },
-      { label: "ARM64", href: "#" },
-    ],
-  },
-  {
-    name: "Linux",
-    comingSoon: true,
-    options: [
-      { label: "AppImage", href: "#" },
-      { label: "Deb", href: "#" },
-      { label: "AppImage", note: "ARM64", href: "#" },
-      { label: "Flatpak", note: "Community maintained", href: "#" },
-    ],
-  },
-];
+type ReleaseAsset = { name: string; browser_download_url: string };
+type Release = { tag_name: string; assets: ReleaseAsset[] };
 
-export default function DownloadPage() {
+async function getLatestRelease(): Promise<Release | null> {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/zenbu-labs/zenbu/releases/latest",
+      {
+        next: { revalidate: 600 },
+        headers: { Accept: "application/vnd.github+json" },
+      },
+    );
+    if (!res.ok) return null;
+    return (await res.json()) as Release;
+  } catch {
+    return null;
+  }
+}
+
+function findAsset(
+  release: Release | null,
+  match: (name: string) => boolean,
+): string {
+  const asset = release?.assets.find((a) => match(a.name));
+  return asset?.browser_download_url ?? RELEASES_URL;
+}
+
+export default async function DownloadPage() {
+  const release = await getLatestRelease();
+  const version = release?.tag_name ?? null;
+
+  const platforms: Platform[] = [
+    {
+      name: "macOS",
+      options: [
+        {
+          label: "Apple Silicon",
+          note: "M-series, late 2020 or newer",
+          href: findAsset(release, (n) => /-arm64\.dmg$/.test(n)),
+        },
+        {
+          label: "Intel",
+          note: "Macs from before late 2020",
+          href: findAsset(
+            release,
+            (n) => n.endsWith(".dmg") && !n.includes("arm64"),
+          ),
+        },
+      ],
+    },
+    {
+      name: "Windows",
+      comingSoon: true,
+      options: [
+        { label: "x64", href: "#" },
+        { label: "ARM64", href: "#" },
+      ],
+    },
+    {
+      name: "Linux",
+      comingSoon: true,
+      options: [
+        { label: "AppImage", href: "#" },
+        { label: "Deb", href: "#" },
+        { label: "AppImage", note: "ARM64", href: "#" },
+      ],
+    },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F4F4] text-[#111] font-sans">
       <Nav />
@@ -57,6 +99,19 @@ export default function DownloadPage() {
         </h1>
         <p className="mt-4 text-sm text-zinc-500">
           Pick a build for your platform.
+          {version && (
+            <>
+              {" "}
+              <a
+                href={`${RELEASES_URL}/tag/${version}`}
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-zinc-300 underline-offset-2 hover:text-[#111] transition-colors"
+              >
+                Latest: {version}
+              </a>
+            </>
+          )}
         </p>
       </section>
 
@@ -76,10 +131,12 @@ export default function DownloadPage() {
                     className="flex items-center gap-2 text-sm text-[#111] hover:text-zinc-500 transition-colors w-fit"
                   >
                     <DownloadIcon />
-                    <span className="font-medium">{opt.label}</span>
-                    {opt.note && (
-                      <span className="text-xs text-zinc-400">{opt.note}</span>
-                    )}
+                    <span className="flex items-baseline gap-2">
+                      <span className="font-medium">{opt.label}</span>
+                      {opt.note && (
+                        <span className="text-xs text-zinc-400">{opt.note}</span>
+                      )}
+                    </span>
                   </a>
                 ))}
               </div>

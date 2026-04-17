@@ -28,7 +28,7 @@ export function NavClient({ stars }: { stars: string | null }) {
           Download
         </NavLink>
         <a
-          href=""
+          href="https://discord.gg/t3jzHHfc6z"
           target="_blank"
           rel="noreferrer"
           aria-label="Discord"

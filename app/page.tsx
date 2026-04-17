@@ -90,7 +90,7 @@ export default function Home() {
           <span>© 2026 Zenbu Labs Inc.</span>
           <div className="flex items-center gap-4">
             <a href="mailto:rob@zenbu.dev" className="hover:text-zinc-600 transition-colors">Contact</a>
-            <a href="" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">Discord</a>
+            <a href="https://discord.gg/t3jzHHfc6z" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">Discord</a>
             <a href="https://github.com/zenbu-labs/zenbu" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">GitHub</a>
           </div>
         </div>
