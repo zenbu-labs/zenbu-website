@@ -115,28 +115,28 @@ export default async function DownloadPage() {
         </p>
       </section>
 
-      <section className="px-6 pb-28 max-w-3xl mx-auto w-full">
-        <div className="rounded-xl border border-zinc-200 bg-white divide-y divide-zinc-200">
+      <section className="px-4 sm:px-6 pb-28 max-w-3xl mx-auto w-full">
+        <div className="rounded-xl border border-zinc-200 bg-white divide-y divide-zinc-200 overflow-hidden">
           {platforms.map((platform) => (
             <div
               key={platform.name}
-              className="relative grid grid-cols-[140px_1fr] gap-6 px-6 py-6"
+              className="relative grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 sm:gap-6 px-4 sm:px-6 py-5 sm:py-6"
             >
               <div className="text-sm font-semibold">{platform.name}</div>
-              <div className="flex flex-col gap-2.5">
+              <div className="flex flex-col gap-2">
                 {platform.options.map((opt, i) => (
                   <a
                     key={i}
                     href={opt.href}
-                    className="flex items-center gap-2 text-sm text-[#111] hover:text-zinc-500 transition-colors w-fit"
+                    className="group flex items-center justify-between gap-3 rounded-lg border border-zinc-200 bg-white px-3 py-2.5 text-sm text-[#111] hover:border-[#111] hover:bg-zinc-50 transition-colors"
                   >
-                    <DownloadIcon />
-                    <span className="flex items-baseline gap-2">
-                      <span className="font-medium">{opt.label}</span>
+                    <span className="flex items-baseline gap-2 min-w-0">
+                      <span className="font-medium truncate">{opt.label}</span>
                       {opt.note && (
-                        <span className="text-xs text-zinc-400">{opt.note}</span>
+                        <span className="text-xs text-zinc-400 truncate">{opt.note}</span>
                       )}
                     </span>
+                    <DownloadIcon />
                   </a>
                 ))}
               </div>
@@ -169,7 +169,7 @@ export default async function DownloadPage() {
 function DownloadIcon() {
   return (
     <svg
-      className="w-4 h-4 text-zinc-400"
+      className="w-4 h-4 shrink-0 text-zinc-400 group-hover:text-[#111] transition-colors"
       viewBox="0 0 16 16"
       fill="none"
       stroke="currentColor"

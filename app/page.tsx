@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ContactLink } from "./contact-link";
 import { Nav } from "./nav";
 
 export default function Home() {
@@ -21,12 +22,6 @@ export default function Home() {
             className="inline-flex items-center bg-[#111] text-white rounded-lg px-5 py-2.5 text-sm font-semibold hover:bg-black transition-colors"
           >
             Download Zenbu
-          </Link>
-          <Link
-            href="/download"
-            className="text-sm text-zinc-500 hover:text-[#111] transition-colors"
-          >
-            More platforms
           </Link>
         </div>
       </section>
@@ -89,7 +84,8 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex items-center justify-between text-xs text-zinc-400">
           <span>© 2026 Zenbu Labs Inc.</span>
           <div className="flex items-center gap-4">
-            <a href="mailto:rob@zenbu.dev" className="hover:text-zinc-600 transition-colors">Contact</a>
+            <ContactLink className="hover:text-zinc-600 transition-colors tabular-nums" />
+            <a href="https://x.com/zenbu_labs" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">X</a>
             <a href="https://discord.gg/t3jzHHfc6z" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">Discord</a>
             <a href="https://github.com/zenbu-labs/zenbu" target="_blank" rel="noreferrer" className="hover:text-zinc-600 transition-colors">GitHub</a>
           </div>
