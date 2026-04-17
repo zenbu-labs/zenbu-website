@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "Zenbu - The extendible coding agent GUI";
+export const alt = "Zenbu - The extensible interface to run any agent";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -70,7 +70,7 @@ export default async function Image() {
             letterSpacing: "-0.01em",
           }}
         >
-          The extendible coding agent GUI
+          The extensible interface to run any agent
         </div>
       </div>
     ),

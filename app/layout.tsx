@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenbu - The extendible coding agent GUI",
+  title: "Zenbu - The extensible interface to run any agent",
   description: "A simple, extendable interface to run any coding agent",
 };
 
