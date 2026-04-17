@@ -62,7 +62,7 @@ export default function Home() {
           />
           <FeatureCell
             title="Local first"
-            description="Everything runs on your machine. Your chats and code stay on your device. Nothing is sent to our servers."
+            description="All your chats and code stay on your device. Nothing ever leaves your machine."
           />
           <FeatureCell
             title="Performant"
